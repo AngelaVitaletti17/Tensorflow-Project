@@ -16,9 +16,10 @@ and license information to be displayed. Please see the following:
       # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
       # See the License for the specific language governing permissions and
       # limitations under the License.
-      # ==============================================================================
-  b. As stated in the above, this script is licensed under Apache 2.0 which requires the full
-     text of that license to be stated. This can be found in the file "license" in the repository.
+      # =============================================================================="
+        Source: classify_image.yp script
+  b. As stated in the above, this script is licensed under Apache 2.0 which requires a link to 
+     the license. This can be found at the link above, http://www.apache.org/licenses/LICENSE-2.0.
      While I have not made any modifications to the file or intend on distributing it, it is on
      a public repository that can be downloaded by many. THOUGH NO CHANGES HAVE BEEN MADE TO THE
      ORIGINAL SCRIPT.
