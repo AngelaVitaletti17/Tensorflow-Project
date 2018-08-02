@@ -42,4 +42,49 @@ for file in os.listdir(targetHousePath):
 output = subprocess.check_output(['python', 'classify_image.py', '*.jpg'], shell=True)
 regex = re.findall('score = (.+?)\)', output.decode("utf-8"))
 
-#Now that we have similarity indices, let's compute some stuff
+#Now that we have similarity values, let's compute some stuff
+'''
+We know that the first image has a value of $599,999.
+Let's try to intelligently figure out pricing of other houses.
+Then we will use Tensorflow to determine the equation for the
+line of best fit. Finally, another known image will be added to the 
+collection (with a known price as well) and see if based on the similarity, 
+it determines the price correctly using the original known image. That was a mouthful.
+'''
+bins = []
+iRegex = []
+for i in range(len(regex)):
+	iRegex.append(float(np.array(regex)[i]))
+
+max1 = np.amax(np.array(iRegex))
+min1 = np.amin(np.array(iRegex))
+
+max2 = max(i for i in iRegex if i != max1)
+min2 = min(i for i in iRegex if i != min1)
+
+
+inc = (max2 - min2) / 3 														#We'll have 5 bins, the other two will include the outliers
+
+#Modify later, there's probably a better way to do this
+_0 = []
+_1 = []
+_2 = []
+_3 = []
+_4 = []
+
+for i in range (len(iRegex)):													#We're going to break everything up into categories of similarity
+	if np.array(iRegex)[i] >= 0 and np.array(iRegex)[i] <= min2:
+		_0.append(iRegex[i])
+	elif np.array(iRegex)[i] > inc and np.array(iRegex)[i] <= min2 + inc:
+		_1.append(iRegex[i])
+	elif np.array(iRegex)[i] > inc + min2 and np.array(iRegex)[i] <= inc * 2 + min2:
+		_2.append(iRegex[i])
+	elif np.array(iRegex)[i] > inc * 2 + min2 and np.array(iRegex)[i] <= inc * 3 + min2:
+		_3.append(iRegex[i])
+	elif np.array(iRegex)[i] > inc * 3 + min2 and np.array(iRegex)[i] <= max1:
+		_4.append(iRegex[i])
+	
+
+		
+	
+	
